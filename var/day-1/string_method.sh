@@ -33,10 +33,12 @@ echo "${len}"
 len=$(expr match "${data}" hel.*)
 echo "${len}"
 
-data="今天是一个好天气，我们去外面游玩吧!"
-# 截取字符串
+data="Today is a good day!Are you ok?"
+# 截取字符串，索引下标从 0 开始
 echo "${data:6}"
-
 echo "${data:6:12}"
-
+# 注意有一个空格
+echo "${data: -5}"
+echo "${data:(-5):2}"
+# 索引下标从 1 开始计算
 echo "$(expr substr "${data}" 7 12)"
