@@ -1,4 +1,4 @@
-# /bin/bash
+#!/bin/bash
 data="I love you,Do you love me"
 echo $data
 
@@ -20,11 +20,11 @@ echo "delete_end_multiple"
 
 # 变量内容符合旧字符串则,则第一个旧字符串会被新字符串取代
 var_replace=${data/love/test}
-echo  ${var_replace}
+echo ${var_replace}
 
 # ${变量名//旧字符串/新字符串}	变量内容符合旧字符串则,则全部的旧字符串会被新字符串取代
 var_replace=${data//love/test}
-echo  ${var_replace}
+echo ${var_replace}
 
 echo ${PATH}
 
