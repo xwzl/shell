@@ -1,0 +1,32 @@
+#!/bin/echo
+function add(){
+   # 直接命令替换
+   echo "`expr $1 + $2`"
+}
+
+function reduce(){
+   # 直接命令替换
+   echo "`expr $1 - $2`"
+}
+
+function multiple(){
+   # 直接命令替换
+   echo "`expr $1 \* $2`"
+}
+
+function divide(){
+   # 直接命令替换
+   echo "`expr $1 / $2`"
+}
+
+function sys_load(){
+     echo "Memory Info"
+     echo
+     free -m
+     echo
+
+     echo "Disk Usage"
+     echo
+     echo -h
+     echo
+}
