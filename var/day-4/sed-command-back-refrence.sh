@@ -1,5 +1,5 @@
 #!/bin/bash
-#  sed 反向引用
+#  sed 反向引用：&
 . ./../common/print.lib
 
 data_name="$(pwd)/sed-common-data.txt"
