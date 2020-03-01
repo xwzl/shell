@@ -32,6 +32,10 @@ if [ ! -f "${data_name}" ]; then
   echo "ftq" >>"${data_name}"
   echo "why" >>"${data_name}"
   echo "qq" >>"${data_name}"
+  echo "txt txt TXT txt TXT txt" >>"${data_name}"
+  echo "txt1 txt1 TXT1 txt1 TXT1 txt1" >>"${data_name}"
+  echo "txt2 txt2 txt2 txt2 txt2 txt2" >>"${data_name}"
+  echo "txt3 txt3 TXT3 txt3 TXT3 txt3" >>"${data_name}"
 fi
 
 # 删除第一行信息,-i 直接修改文件信息
@@ -66,3 +70,23 @@ sed -i "/ftq/r config.init" "${data_name}"
 delimiter
 echo "固定写法：w 命令与追加的内容中间有一个空格间隔"
 sed -i "/ftq/w other.txt" "${data_name}"
+
+# 修改替换
+delimiter
+echo "替换语法：s/pattern/string/ ，默认替换每行第一个匹配到的内容"
+
+# 查找并替换，查找符合 pattern 模式的字符串，将其第一个匹配的内容替换
+sed -i "s/txt/hello/" "${data_name}"
+# g 表示全部匹配的都替换
+sed -i "s/txt1/hello1/g" "${data_name}"
+# 4g 表示同一行，除开前 1 到 4 个匹配的内容(除开第一个)，其它匹配项替换为 hello2
+# hello2 txt2 txt2 txt2 hello2 hello2
+sed -i "s/txt2/hello2/4g" "${data_name}"
+# 加 i 参数表示匹配时忽略大小写，g 表示匹配到的全部替换
+sed -i "s/txt3/hello3/ig" "${data_name}"
+
+delimiter
+echo "= 显示行号"
+sed -n "/\/sbin/=" "${data_name}"
+
+
