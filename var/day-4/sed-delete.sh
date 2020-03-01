@@ -55,7 +55,7 @@ sed -i "/^yard/,13 d" "${data_name}"
 sed -i "5,/^frp/d" "${data_name}"
 
 # 删除以 yard 开头的行到最后行的所有内容
-sed -i "/^yard/,/$/d" "${data_name}"
+sed -i "/^yard/,$d" "${data_name}"
 
 # 删除以 # 或者空格开头的行
 sed -i "/^#/d;/^$/d" "${data_name}"
