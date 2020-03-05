@@ -30,6 +30,7 @@ find . -user "root"
 # 查找 root 目录下所有的普通文件
 #find /root -maxdepth 2 -type f
 find `pwd` -type f
+find /opt -name "docker" -type d
 #  d 目录         find .type d
 #  c 字符设备文件  find .type c
 #  b 块设备文件    find .type b
