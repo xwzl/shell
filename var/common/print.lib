@@ -26,3 +26,7 @@ function delimiter(){
 function base_delimiter(){
     echo -e "${BLUE_COLOR}=================分割符=================${RES}"
 }
+
+function head(){
+    echo -e "${RED_COLOR}${1}${RES}"
+}
