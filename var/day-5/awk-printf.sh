@@ -26,9 +26,14 @@ fi
 # %s 相当于一个占位符,逗号作为间隔，20 代表字符填充，- 表示左对齐，默认右对齐
 #awk 'BEGIN{FS=":"}{printf "%-20s %-20s\n",$1,NR}' "${file_name}"
 
-# 10进制
-awk 'BEGIN{FS=":"}{printf "%-15d\n",NR}' "${file_name}"
-awk 'BEGIN{FS=":"}{printf "%#-15x\n",NR}' "${file_name}"
-awk 'BEGIN{FS=":"}{printf "%#-15o\n",$4}' "${file_name}"
+# 10 进制，15 位数字
+#awk 'BEGIN{FS=":"}{printf "%-15d\n",NR}' "${file_name}"
+# 16 进制，15 位数字
+#awk 'BEGIN{FS=":"}{printf "%#-15x\n",NR}' "${file_name}"
+# 8 进制，15 位数字
+#awk 'BEGIN{FS=":"}{printf "%#-15o\n",$4}' "${file_name}
+# 浮点数
+#awk 'BEGIN{FS=":"}{printf "%f\n",$4}' "${file_name}"
+awk 'BEGIN{FS=":"}{printf "%e\n",$4}' "${file_name}"
 
 rm -rf "${file_name}"
