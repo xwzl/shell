@@ -35,6 +35,26 @@ fi
 #awk 'BEGIN{FS=":"}$2~/admin/{print $0}' "${file_name}"
 
 # 布尔运算 || && !
-awk 'BEGIN{FS=":"}$2=="admin" || $2=="awk"{print $0}' "${file_name}"
+#awk 'BEGIN{FS=":"}$2=="admin" || $2=="awk"{print $0}' "${file_name}"
+
+# BEGIN 处理文本之前的数据
+awk 'BEGIN{var1=1;var2="hello";print var1 var2}'
+
+awk 'BEGIN{num1=20;num2=3;printf "num1+num2:%d\n",num1+num2}'
+awk 'BEGIN{num1=20;num2=3;printf "num1-num2:%d\n",num1-num2}'
+awk 'BEGIN{num1=20;num2=3;printf "num1*num2:%d\n",num1*num2}'
+awk 'BEGIN{num1=20;num2=3;printf "num1/num2:%0.2f\n",num1/num2}'
+awk 'BEGIN{num1=20;num2=3;printf "num1**num2:%d\n",num1**num2}'
+
+# 再返回 x 变量之前，x 变量加 1
+awk 'BEGIN{x=20;y=++x;print x,y}'
+
+# 在返回 x 变量之后，x 变量加 1
+awk 'BEGIN{x=20;y=x++;print x,y}'
+
+# ^$ 表示以空白符开始的行执行 sum++ 操作，最后打印空白行的次数
+awk "/^$/{sum++}END{print sum}" "awk-pattern.sh"
+
+awk 'BEGIN{printf "%-8s%-5d%-5d%-5d%-5d%0.2f\n","name","math","chinese","english","pe","avg"};{total=$2+$3+$4+$5;avg=total/4;printf "%-8s%-5d%-5d%-5d%-5d%0.2f\n",$1,$2,$3,$4,$5,avg}' score.txt
 
 rm -rf "${file_name}"
