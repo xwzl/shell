@@ -55,6 +55,6 @@ awk 'BEGIN{x=20;y=x++;print x,y}'
 # ^$ 表示以空白符开始的行执行 sum++ 操作，最后打印空白行的次数
 awk "/^$/{sum++}END{print sum}" "awk-pattern.sh"
 
-awk 'BEGIN{printf "%-8s%-5d%-5d%-5d%-5d%0.2f\n","name","math","chinese","english","pe","avg"};{total=$2+$3+$4+$5;avg=total/4;printf "%-8s%-5d%-5d%-5d%-5d%0.2f\n",$1,$2,$3,$4,$5,avg}' score.txt
+awk 'BEGIN{printf "%-6s%-5s%-8s%-8s%-5s%0.2s\n","name","math","chinese","english","pe","avg"};{total=$2+$3+$4+$5;avg=total/4;printf "%-6s%-5d%-8d%-8d%-5d%0.2f\n",$1,$2,$3,$4,$5,avg}' score.txt
 
 rm -rf "${file_name}"
