@@ -1,0 +1,20 @@
+
+# 返回进程名称列表字符串
+function get_all_process() {
+
+}
+
+# 返回进程组列表字符串
+function get_all_group() {
+
+}
+
+# 返回进程详细信息列表字符串，详细信息包括：status,cpu,MEN,启动时间
+function get_process_info() {
+
+}
+
+# 组名
+function get_all_process_by_group() {
+
+}
