@@ -50,9 +50,8 @@ function get_process_info_by_pid() {
   fi
   # ps aux 中第二列为 pid,第三列为 cpu 使用率，第四列为 men 使用率
   pro_cpu=$(ps aux | awk -v pid=$1 '$2==pid{print $3}')
-  pro_men=$(ps aux | awk -v pid=$1 '$2==pid{print $4}')
+  pro_mem=$(ps aux | awk -v pid=$1 '$2==pid{print $4}')
   pro_start_time=$(ps -p $1 -o lstart | grep -v STARTED)
-  echo "${pro_status} ${pro_cpu} ${pro_men} ${pro_start_time}"
 }
 
 #
@@ -79,6 +78,55 @@ function is_group_in_config() {
 
 }
 
+# 根据进程名称获取组名
+function get_group_by_process_name() {
+  for gn in $(get_all_group); do
+    for pn in $(get_all_process_by_group $gn); do
+      if [ "$pn" == "$1" ]; then
+        echo "$gn"
+      fi
+    done
+  done
+}
+
+function format_print() {
+  ps -ef | grep $1 | grep -v grep | grep -v $this_pid &>/dev/null
+  if [ $? -eq 0 ]; then
+    p_ids=$(get_process_pid_by_name $1)
+    for p_id in $p_ids; do
+      get_process_info_by_pid $p_id
+      # 有空格需要加 ""
+      awk -v p_name=$1 \
+      -v g_name=$2 \
+      -v p_status=$pro_status \
+      -v p_cpu=$pro_cpu \
+      -v p_mem=$pro_mem \
+      -v pId=$p_id \
+      -v p_start_time="$pro_start_time" \
+      'BEGIN{printf "%-20s%-12s%-10s%-6s%-7s%-10s%-20s\n",p_name,g_name,p_status,pId,p_cpu,p_mem,p_start_time}'
+    done
+  else
+    #    awk -v p_name=$1 'BEGIN{printf "%-10s",p_name}'
+    awk -v p_name=$1 \
+    -v g_name=$2 \
+    -v p_status="STOPPED" \
+    -v p_cpu="NULL" \
+    -v p_mem="NULL" \
+    -v pId="NULL" \
+    -v p_start_time="NULL" \
+    'BEGIN{printf "%-20s%-12s%-10s%-6s%-7s%-10s%-20s\n",p_name,g_name,p_status,pId,p_cpu,p_mem,p_start_time}'
+  fi
+}
+
+function is_process_in_config() {
+  for pn in $(get_all_process); do
+    if [ $pn == $1 ]; then
+      return
+    fi
+  done
+  echo "process $1 not in process.config"
+  return 1
+}
 if [ ! -e "${HOME_DIR}/${CONFIG_FILE}" ]; then
   echo "${CONFIG_FILE} is not exist.. Please check.."
   exit 1
@@ -91,6 +139,7 @@ fi
 #is_group_in_config $1 && echo exist || echo not in exist
 #get_all_process_by_group $1
 
+awk 'BEGIN{printf "%-20s%-12s%-10s%-6s%-7s%-10s%-20s\n","ProcessName---------","GroupName---","Status----","PID---","CPU---","MEMORY---","StartTime---"}'
 if [ $# -gt 0 ]; then
   if [ "$1" == "-g" ]; then
     # 移除脚本输入时的第一个参数 -g demo => demo
@@ -99,24 +148,24 @@ if [ $# -gt 0 ]; then
     for gn in $@; do
       # 进程名
       for pn in $(get_all_process_by_group $gn); do
-        #        pid=$(get_process_pid_by_name ${pn})
-        #        # 如果获取到进程信息
-        #        if [ "${pid}" != '' ]; then
-        #          get_process_info_by_pid ${pid}
-        #        else
-        #          echo "${pn} is stopped !"
-        #        fi
-        echo "待做"
+        # 格式化输出
+        is_process_in_config $pn && format_print $pn $gn
       done
     done
   else
     # 参数不全，当做处理进程信息
-    for gn in $@; do
-      echo "待做"
+    for pn in $@; do
+      gn=$(get_group_by_process_name $pn)
+      is_process_in_config $pn && format_print $pn $gn
     done
   fi
 else
-  for pg in $(get_all_process); do
-    echo "待做"
+  for pn in $(get_all_process); do
+    gn=$(get_group_by_process_name $pn)
+    is_process_in_config $pn && format_print $pn $gn
   done
 fi
+
+#group_name=`get_group_by_process_name mysql`
+
+#format_print mysql WEB
