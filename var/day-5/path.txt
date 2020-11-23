@@ -1,0 +1,46 @@
+Entering 'common/common-component'
+/d/root/root/common/common-component
+Entering 'common/common-model'
+/d/root/root/common/common-model
+Entering 'common/common-starter'
+/d/root/root/common/common-starter
+Entering 'common/common-util'
+/d/root/root/common/common-util
+Entering 'service/service-cas'
+/d/root/root/service/service-cas
+Entering 'service/service-cm'
+/d/root/root/service/service-cm
+Entering 'service/service-dm'
+/d/root/root/service/service-dm
+Entering 'service/service-im'
+/d/root/root/service/service-im
+Entering 'service/service-im2'
+/d/root/root/service/service-im2
+Entering 'service/service-mb'
+/d/root/root/service/service-mb
+Entering 'service/service-mc'
+/d/root/root/service/service-mc
+Entering 'service/service-oda'
+/d/root/root/service/service-oda
+Entering 'service/service-om'
+/d/root/root/service/service-om
+Entering 'service/service-sp'
+/d/root/root/service/service-sp
+Entering 'service/service-task'
+/d/root/root/service/service-task
+Entering 'service/service-tm'
+/d/root/root/service/service-tm
+Entering 'service/service-um'
+/d/root/root/service/service-um
+Entering 'view/view-back-stage'
+/d/root/root/view/view-back-stage
+Entering 'view/view-customer-app'
+/d/root/root/view/view-customer-app
+Entering 'view/view-customer-service'
+/d/root/root/view/view-customer-service
+Entering 'view/view-gateway'
+/d/root/root/view/view-gateway
+Entering 'view/view-medical-care'
+/d/root/root/view/view-medical-care
+Entering 'view/view-terminal-service'
+/d/root/root/view/view-terminal-service
